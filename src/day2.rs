@@ -1,4 +1,4 @@
-use std::cmp::{max, min};
+use std::cmp::{max};
 use std::collections::HashMap;
 
 #[derive(Debug)]
@@ -61,17 +61,17 @@ fn part1(input: &[Game]) -> u32 {
             total.get(&"green".to_string()).unwrap_or(&0u32) <= &13u32,
             total.get(&"blue".to_string()).unwrap_or(&0u32) <= &14u32,
         ].iter().all(|v| *v) {
-            println!("NOT possible: {:?}\t{:?}", total, g);
+            // println!("NOT possible: {:?}\t{:?}", total, g);
             0
         } else {
-            println!("    possible: {:?}\t{:?}", total, g);
+            // println!("    possible: {:?}\t{:?}", total, g);
             i + 1
         }
     }).sum::<usize>() as u32
 }
 #[aoc(day2, part2)]
 fn part2(input: &[Game]) -> u32 {
-    input.iter().enumerate().map(|(i, g)| {
+    input.iter().enumerate().map(|(_, g)| {
         let total = g.sets.iter().fold(HashMap::new(), |mut acc, set| {
             set.iter().for_each(|(c, v)| {
                 *acc.entry(c).or_insert(*v) = max(
